@@ -13,6 +13,10 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.102
+    - name: Setup NuGet
+      uses: NuGet/setup-nuget@v1.0.2
+      with:
+        nuget-version: latest
     - name: Build & test with dotnet
       run: dotnet test --configuration Release
     - name: Add GPR Source
