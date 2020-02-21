@@ -16,6 +16,7 @@
     <Authors>Sutro Machine</Authors>
     <Description>C# library for 3D geometric computation, mesh algorithms, etc.</Description>
     <UserSecretsId>6a2cd393-2aad-4eda-96da-d4cdef88ac20</UserSecretsId>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
   </PropertyGroup>
 
   <ItemGroup>
