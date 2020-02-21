@@ -1,5 +1,5 @@
 version: '1.0.{build}'
-image: Visual Studio 2017
+image: Visual Studio 2019
 
 #patch version in csproj file 
 dotnet_csproj:
@@ -13,21 +13,21 @@ dotnet_csproj:
 
 build_script:
 - cmd: >-
-    dotnet restore geometry3Sharp_netstandard.csproj
+    dotnet restore geometry3Sharp\geometry3Sharp.csproj
 
-    dotnet build geometry3Sharp_netstandard.csproj -c Release
+    dotnet build geometry3Sharp\geometry3Sharp.csproj -c Release
 
-    dotnet pack geometry3Sharp_netstandard.csproj -c Release
-test: off
+    dotnet pack geometry3Sharp\geometry3Sharp.csproj -c Release
+
+test_script:
+- cmd: >-
+   dotnet test --logger:Appveyor geometry3Sharp.Tests\geometry3Sharp.Tests.csproj -c Release
+
 artifacts:
-- path: bin\Release\*.nupkg
+- path: geometry3Sharp\bin\Release\*.nupkg
+
 deploy:
   provider: NuGet
-#  server:                  # remove to push to NuGet.org
+  server: https://nuget.pkg.github.com/gregmeess/index.json
   api_key:
-    secure: DIcqDc7g8mWxhl3/G0MxoGVSnRJzdMvPZdJM7NbYjuy1tFhcF8hWA+nNoGntESX7
-  on:
-    appveyor_repo_tag: true	
-  skip_symbols: false
-  symbol_server:           # remove to push symbols to SymbolSource.org
-  artifact: /.*\.nupkg/
+    secure: KVBo3tq9evJxQe/+soJDrd83hVbby+2QSmDw0tEF1cnH7Laeoc1XbYiFLJu89WDb
