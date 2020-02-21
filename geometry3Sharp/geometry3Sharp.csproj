@@ -7,6 +7,7 @@
     <Copyright>Copyright © Ryan Schmidt/gradientspace 2016</Copyright>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <Authors>Sutro Machine</Authors>
+    <Version>1.0.0</Version>
     <Description>C# library for 3D geometric computation, mesh algorithms, etc.</Description>
   </PropertyGroup>
 
