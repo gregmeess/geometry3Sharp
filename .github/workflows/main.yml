@@ -1,27 +1,34 @@
-name: .NET Core
-
-on: [push]
+on:
+  [push]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v2
-    - name: Setup .NET Core
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: 3.1.102
-    - name: Setup NuGet
-      uses: NuGet/setup-nuget@v1.0.2
-      with:
-        nuget-version: latest
-    - name: Build & test with dotnet
-      run: dotnet test -c Release
-    - name: Create NuGet package
-      run: dotnet pack -c Release
-    - name: Add GPR Source
-      run: nuget sources Add -Name GPR -Source "https://nuget.pkg.github.com/gregmeess/index.json" -UserName gregmeess -Password ${{ secrets.GITHUB_TOKEN }}
-    - name: Push to GitHub Packages
-      run: dotnet nuget push "bin/Release/geometry3Sharp.1.0.0.nupkg" --source GPR
+      - uses: actions/checkout@v1
+      - name: Build project
+        run: dotnet build --configuration Release
+  
+  test:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Test project
+        run: dotnet test
+  
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup NuGet
+        uses: nuget/setup-nuget@v1
+        
+      - uses: actions/checkout@v1
+      - name: Pack package
+        run: dotnet pack --configuration Release
+      
+      - name: Push package
+        run: |
+          nuget sources add -name "GPR" -Source https://nuget.pkg.github.com/gregmeess/index.json -Username gregmeess -Password ${{ secrets.GITHUB_TOKEN }}
+          nuget push **\*.nupkg -source "GPR"
