@@ -22,4 +22,4 @@ jobs:
     - name: Add GPR Source
       run: nuget sources Add -Name "GPR" -Source "https://nuget.pkg.github.com/gregmeess/index.json" -UserName gregmeess -Password ${{ secrets.GITHUB_TOKEN }}
     - name: Push to GitHub Packages
-      run: nuget push *.nupkg -Source "GPR" 
+      run: nuget push geometry3Sharp\bin\Release\geometry3Sharp.*.nupkg -Source "GPR" 
