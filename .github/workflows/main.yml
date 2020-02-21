@@ -16,6 +16,6 @@ jobs:
     - name: Build & test with dotnet
       run: dotnet test --configuration Release
     - name: Add GPR Source
-      run: nuget sources Add -Name "GPR" -Source https://nuget.pkg.github.com/gregmeess/index.json -UserName gregmeess -Password ${{ secrets.GITHUB_TOKEN }}
+      run: nuget sources Add -Name "GPR" -Source "https://nuget.pkg.github.com/gregmeess/index.json" -UserName gregmeess -Password ${{ secrets.GITHUB_TOKEN }}
     - name: Push to GitHub Packages
       run: nuget push nupkg\*.nupkg -Source "GPR" 
