@@ -1,5 +1,7 @@
 # geometry3Sharp
 
+![.NET Core](https://github.com/gregmeess/geometry3Sharp/workflows/.NET%20Core/badge.svg)
+
 Open-Source (Boost-license) C# library for geometric computing. 
 
 geometry3Sharp is compatible with Unity. Set the G3_USING_UNITY Scripting Define and you will have transparent interop between g3 and Unity vector types (*see details at the very bottom of this README*). Although the library is written for C# 4.5, if you are using the .NET 3.5 Unity runtime, it will still work, just with a few missing features.
