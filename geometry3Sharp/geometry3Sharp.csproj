@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <PackageId>geometry3Sharp</PackageId>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
     <PackageDescription>C# library for 3D geometric computation, mesh algorithms, etc.</PackageDescription>
     <RepositoryUrl>https://github.com/gregmeess/geometry3Sharp</RepositoryUrl>
   </PropertyGroup>

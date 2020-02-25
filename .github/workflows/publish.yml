@@ -13,7 +13,7 @@ jobs:
       - name: Build & test project
         run: dotnet test -c Release
       - name: Create package
-        run: dotnet pack -c Release
+        run: dotnet pack -c Release --include-source
       - name: Setup NuGet
         uses: nuget/setup-nuget@v1      
       - name: Push package
