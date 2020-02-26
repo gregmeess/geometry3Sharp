@@ -10,13 +10,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - name: Build project
-        run: dotnet build -c Release
-      - name: Setup NuGet
-        uses: nuget/setup-nuget@v1      
       - name: Create package
-        run: dotnet pack -c Release --include-source
+        run: dotnet pack geometry3Sharp/geometry3Sharp.csproj -c Release --include-source --include-symbols
       - name: Push package
-        run: |
-          nuget sources add -name "GPR" -Source https://nuget.pkg.github.com/gregmeess/index.json -Username gregmeess -Password ${{ secrets.GITHUB_TOKEN }}
-          nuget push **\*.symbols.nupkg -source "GPR"
+        run: dotnet nuget push **/*.nupkg 
+               --api-key ${{ secrets.NUGET_API_KEY }}
+               --source https://api.nuget.org/v3/index.json
