@@ -15,7 +15,7 @@ jobs:
       - name: Setup NuGet
         uses: nuget/setup-nuget@v1      
       - name: Create package
-        run: nuget pack -c Release --include-source
+        run: dotnet pack -c Release --include-source
       - name: Push package
         run: |
           nuget sources add -name "GPR" -Source https://nuget.pkg.github.com/gregmeess/index.json -Username gregmeess -Password ${{ secrets.GITHUB_TOKEN }}
