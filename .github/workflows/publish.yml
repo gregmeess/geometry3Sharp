@@ -10,13 +10,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - name: Build & test project
-        run: dotnet test -c Release
-      - name: Create package
-        run: dotnet pack -c Release --include-source --include-symbols
+      - name: Build project
+        run: dotnet build -c Release
       - name: Setup NuGet
         uses: nuget/setup-nuget@v1      
+      - name: Create package
+        run: nuget pack -c Release --include-source
       - name: Push package
         run: |
           nuget sources add -name "GPR" -Source https://nuget.pkg.github.com/gregmeess/index.json -Username gregmeess -Password ${{ secrets.GITHUB_TOKEN }}
-          nuget push **\*.nupkg -source "GPR"
+          nuget push **\*.symbols.nupkg -source "GPR"
